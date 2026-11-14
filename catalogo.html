@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Comercial & E-Commerce | LimpioX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #d8d8d8;
+            --bg-card: #e5e5e5;
+            --dark-main: #121212;
+            --red-glow: #ff1a1a;
+            --red-bright: #e60000;
+            --red-hover: #cc0000;
+            --text-dark: #121212;
+            --text-muted: #555555;
+            --white: #ffffff;
+            --border-width: 2px;
+            --shadow-hard: 5px 5px 0px var(--dark-main);
+            --shadow-hover: 7px 7px 0px var(--red-bright);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* HEADER / NAVBAR */
+        .store-header {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 0.9rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 990;
+            border-bottom: var(--border-width) solid var(--dark-main);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .store-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: var(--border-width) solid var(--white);
+            padding: 0.25rem 0.65rem;
+            transition: all 0.2s ease;
+        }
+
+        .store-logo:hover {
+            background-color: var(--red-bright);
+            border-color: var(--red-bright);
+        }
+
+        .btn-back-portfolio {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .btn-back-portfolio:hover {
+            color: var(--red-bright);
+        }
+
+        /* BOTÓN DE CARRITO EN HEADER */
+        .cart-trigger-btn {
+            background: var(--red-bright);
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 0.5rem 1.1rem;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        .cart-trigger-btn:hover {
+            background: var(--red-hover);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.7);
+        }
+
+        .cart-count-badge {
+            background: var(--dark-main);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 0.15rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* BANNER PRINCIPAL */
+        .store-hero {
+            background-color: #cfcfcf;
+            padding: 3rem 0 2.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-hero-glow {
+            position: absolute;
+            top: -50px;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--red-glow) 0%, rgba(255, 26, 26, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .hero-title-group {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--dark-main);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.6rem;
+            border: 1px solid var(--red-bright);
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-main-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-main-subtitle {
+            font-size: 1rem;
+            color: var(--text-dark);
+            max-width: 650px;
+            font-weight: 500;
+        }
+
+        /* CONTROLES: FILTROS Y BÚSQUEDA */
+        .controls-section {
+            background-color: var(--bg-card);
+            border-bottom: var(--border-width) solid var(--dark-main);
+            padding: 1.2rem 0;
+        }
+
+        .controls-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-tab {
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            color: var(--dark-main);
+            padding: 0.45rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .cat-tab:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--dark-main);
+        }
+
+        .cat-tab.active {
+            background: var(--dark-main);
+            color: var(--white);
+            border-color: var(--dark-main);
+        }
+
+        .search-wrapper {
+            position: relative;
+            flex-grow: 1;
+            max-width: 320px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.55rem 0.85rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--red-bright);
+        }
+
+        /* GRID DE PRODUCTOS */
+        .products-section {
+            padding: 3rem 0;
+            flex-grow: 1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            box-shadow: var(--shadow-hard);
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--dark-main);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--red-bright);
+            z-index: 2;
+        }
+
+        .product-img-box {
+            height: 180px;
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--dark-main);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            color: var(--dark-main);
+            height: 100%;
+            width: 100%;
+            background: #e8e8e8;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .product-category-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--red-bright);
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            border-top: 1px solid #cccccc;
+            padding-top: 0.8rem;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark-main);
+        }
+
+        .btn-add-cart {
+            background: var(--dark-main);
+            color: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.55rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--red-bright);
+            border-color: var(--red-bright);
+            transform: translate(-1px, -1px);
+        }
+
+        /* DRAWER LATERAL DEL CARRITO */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 440px;
+            height: 100%;
+            background: var(--bg-card);
+            border-left: 3px solid var(--dark-main);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -8px 0px 0px rgba(0,0,0,0.4);
+        }
+
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .btn-close-cart {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .btn-close-cart:hover {
+            color: var(--red-bright);
+        }
+
+        .cart-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-muted);
+            margin: auto 0;
+            padding: 2rem 1rem;
+        }
+
+        .cart-item {
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.8rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            box-shadow: 3px 3px 0px var(--dark-main);
+        }
+
+        .cart-item-img {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            border: 1px solid var(--dark-main);
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.8rem;
+            color: var(--red-bright);
+            font-weight: 800;
+        }
+
+        .cart-qty-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.3rem;
+        }
+
+        .btn-qty {
+            background: var(--dark-main);
+            color: var(--white);
+            border: none;
+            width: 22px;
+            height: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-qty:hover {
+            background: var(--red-bright);
+        }
+
+        .qty-num {
+            font-weight: 700;
+            font-size: 0.82rem;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .btn-del-item {
+            background: none;
+            border: none;
+            color: #888888;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.2rem;
+        }
+
+        .btn-del-item:hover {
+            color: var(--red-bright);
+        }
+
+        .cart-footer {
+            background: var(--bg-card);
+            border-top: var(--border-width) solid var(--dark-main);
+            padding: 1.2rem;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .cart-total-row.final {
+            font-size: 1.25rem;
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            border-top: 1px solid #bbbbbb;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .cart-actions-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .btn-checkout {
+            background: var(--red-bright);
+            color: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.8rem;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 4px 4px 0px var(--dark-main);
+            transition: all 0.2s ease;
+        }
+
+        .btn-checkout:hover {
+            background: var(--red-hover);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--dark-main);
+        }
+
+        .btn-clear-cart {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid #777777;
+            padding: 0.45rem;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-clear-cart:hover {
+            background: var(--dark-main);
+            color: var(--white);
+        }
+
+        /* MODAL DE CHECKOUT / PEDIDO */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 3px solid var(--dark-main);
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 8px 8px 0px var(--dark-main);
+        }
+
+        .modal-header {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 0.9rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+        }
+
+        .modal-body {
+            padding: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.6rem 0.8rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--red-bright);
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--dark-main);
+            color: var(--white);
+            border: 2px solid var(--red-bright);
+            padding: 0.8rem 1.3rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 2000;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+            display: none;
+            animation: slideToast 0.3s ease;
+        }
+
+        @keyframes slideToast {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* FOOTER */
+        .store-footer {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: var(--border-width) solid var(--dark-main);
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .hero-main-title {
+                font-size: 2.1rem;
+            }
+            .search-wrapper {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DE LA TIENDA -->
+    <header class="store-header">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="index.html" class="btn-back-portfolio">← Volver al Portafolio</a>
+                <a href="catalogo.html" class="store-logo">[ LIMPIOX STORE ]</a>
+            </div>
+            <div>
+                <button type="button" class="cart-trigger-btn" id="btn-open-cart">
+                    <span>🛒 Ver Carrito</span>
+                    <span class="cart-count-badge" id="cart-counter">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER HERO -->
+    <section class="store-hero">
+        <div class="store-hero-glow"></div>
+        <div class="container hero-title-group">
+            <span class="hero-badge">[ DEMO EN VIVO • E-COMMERCE FRONTEND ]</span>
+            <h1 class="hero-main-title">CATÁLOGO DE PRODUCTOS<br>DE LIMPIEZA ↗</h1>
+            <p class="hero-main-subtitle">
+                Aplicación interactiva con catálogo dinámico, filtrado instantáneo, gestión de carrito con persistencia local y checkout automatizado hacia WhatsApp.
+            </p>
+        </div>
+    </section>
+
+    <!-- BARRA DE CONTROLES: FILTROS Y BÚSQUEDA -->
+    <section class="controls-section">
+        <div class="container controls-flex">
+            <div class="category-tabs" id="category-tabs">
+                <button type="button" class="cat-tab active" data-cat="todos">Todos</button>
+                <button type="button" class="cat-tab" data-cat="pisos">Limpia Pisos</button>
+                <button type="button" class="cat-tab" data-cat="desengrasantes">Desengrasantes</button>
+                <button type="button" class="cat-tab" data-cat="combos">Promociones</button>
+            </div>
+            <div class="search-wrapper">
+                <input type="text" id="search-input" class="search-input" placeholder="🔍 Buscar producto...">
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID DE PRODUCTOS -->
+    <main class="products-section">
+        <div class="container">
+            <div class="products-grid" id="products-container">
+                <!-- Los productos se inyectan dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- DRAWER LATERAL DEL CARRITO -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-label="Carrito de compras">
+        <div class="cart-header">
+            <span class="cart-title">[ TU CARRITO ]</span>
+            <button type="button" class="btn-close-cart" id="btn-close-cart" aria-label="Cerrar carrito">&times;</button>
+        </div>
+
+        <div class="cart-body" id="cart-items-list">
+            <!-- Items del carrito -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal">$ 0 COP</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Envío estimado:</span>
+                <span style="color: green; font-weight: 700;">Gratis</span>
+            </div>
+            <div class="cart-total-row final">
+                <span>TOTAL:</span>
+                <span id="cart-total" style="color: var(--red-bright);">$ 0 COP</span>
+            </div>
+
+            <div class="cart-actions-group">
+                <button type="button" class="btn-checkout" id="btn-open-checkout">
+                    Completar Pedido ↗
+                </button>
+                <button type="button" class="btn-clear-cart" id="btn-clear-cart">
+                    Vaciar Carrito
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MODAL DE CHECKOUT / PEDIDO POR WHATSAPP -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span>[ CONFIRMAR PEDIDO ]</span>
+                <button type="button" class="btn-close-cart" id="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.85rem; margin-bottom: 1.2rem; color: var(--text-dark);">
+                    Ingresa tus datos para generar el resumen y enviarlo directamente por <strong>WhatsApp</strong> al asesor comercial:
+                </p>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label class="form-label" for="client-name">Nombre Completo *</label>
+                        <input type="text" id="client-name" class="form-input" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-address">Dirección de Entrega *</label>
+                        <input type="text" id="client-address" class="form-input" placeholder="Ej. Calle 45 # 12-34, Apto 201" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="client-notes">Notas o Indicaciones Especiales</label>
+                        <input type="text" id="client-notes" class="form-input" placeholder="Ej. Dejar en portería">
+                    </div>
+                    
+                    <button type="submit" class="btn-checkout" style="width: 100%; margin-top: 1rem;">
+                        📲 Enviar Pedido a WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div class="toast" id="toast-msg">Producto añadido al carrito</div>
+
+    <!-- FOOTER -->
+    <footer class="store-footer">
+        <div class="container">
+            <p>&copy; 2026 LimpioX Store — Proyecto Front-End desarrollado con HTML5, CSS3 y JavaScript Puro.</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT: E-COMMERCE COMPLETO -->
+    <script>
+        // BASE DE DATOS DE PRODUCTOS
+        const PRODUCTS = [
+            {
+                id: 'limpia-pisos-1',
+                name: 'Limpia Pisos LimpioX Floral',
+                category: 'pisos',
+                price: 12500,
+                desc: 'Fórmula concentrada con aroma prolongado a flores silvestres y acción antibacterial.',
+                img: 'Limia pisos.jpeg',
+                tag: 'POPULAR'
+            },
+            {
+                id: 'desengrasante-1',
+                name: 'Desengrasante Multiusos Max',
+                category: 'desengrasantes',
+                price: 18000,
+                desc: 'Poder desengrasante instantáneo para cocinas, parrillas, motores y superficies difíciles.',
+                img: 'Desengransante.jpeg',
+                tag: 'POTENTE'
+            },
+            {
+                id: 'limpia-pisos-2',
+                name: 'Limpia Pisos Lavanda Relax',
+                category: 'pisos',
+                price: 12500,
+                desc: 'Brillo instantáneo sin enjuague para pisos de baldosa, cerámica y porcelanato.',
+                img: 'Limia pisos.jpeg',
+                tag: 'NUEVO'
+            },
+            {
+                id: 'desengrasante-2',
+                name: 'Desengrasante Cítrico Especial',
+                category: 'desengrasantes',
+                price: 16000,
+                desc: 'Formulación biodegradable con extracto de naranja para grasa vegetal y animal.',
+                img: 'Desengransante.jpeg',
+                tag: 'ECOLÓGICO'
+            },
+            {
+                id: 'combo-ahorro',
+                name: 'Combo Limpieza Total (Pack)',
+                category: 'combos',
+                price: 36000,
+                desc: 'Incluye 2 Limpia Pisos + 1 Desengrasante Multiusos con 15% de ahorro garantizado.',
+                img: 'Limia pisos.jpeg',
+                tag: 'OFERTA'
+            }
+        ];
+
+        // GESTIÓN DEL ESTADO DEL CARRITO CON LOCALSTORAGE
+        let cart = JSON.parse(localStorage.getItem('limpiox_cart')) || [];
+
+        // ELEMENTOS DEL DOM
+        const productsContainer = document.getElementById('products-container');
+        const categoryTabs = document.getElementById('category-tabs');
+        const searchInput = document.getElementById('search-input');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const btnOpenCart = document.getElementById('btn-open-cart');
+        const btnCloseCart = document.getElementById('btn-close-cart');
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartCounter = document.getElementById('cart-counter');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTotal = document.getElementById('cart-total');
+        const btnClearCart = document.getElementById('btn-clear-cart');
+        const btnOpenCheckout = document.getElementById('btn-open-checkout');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const checkoutForm = document.getElementById('checkout-form');
+        const toast = document.getElementById('toast-msg');
+
+        let currentCategory = 'todos';
+        let searchQuery = '';
+
+        // FORMATEO DE MONEDA ($ COP)
+        function formatMoney(amount) {
+            return '$ ' + amount.toLocaleString('es-CO') + ' COP';
+        }
+
+        // MOSTRAR MENSAJE TOAST
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+
+        // RENDERIZAR PRODUCTOS SEGÚN FILTRO Y BÚSQUEDA
+        function renderProducts() {
+            const filtered = PRODUCTS.filter(prod => {
+                const matchCategory = currentCategory === 'todos' || prod.category === currentCategory;
+                const matchSearch = prod.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    prod.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                productsContainer.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg-card); border: 2px dashed var(--dark-main);">
+                        <h3>No encontramos productos que coincidan.</h3>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Intenta con otra palabra clave o categoría.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            productsContainer.innerHTML = filtered.map(prod => `
+                <div class="product-card">
+                    <span class="card-tag">${prod.tag}</span>
+                    <div class="product-img-box">
+                        <img src="${prod.img}" alt="${prod.name}" class="product-img" onerror="this.src='Limia pisos.jpeg'">
+                    </div>
+                    <span class="product-category-label">[ ${prod.category} ]</span>
+                    <h3 class="product-name">${prod.name}</h3>
+                    <p class="product-desc">${prod.desc}</p>
+                    <div class="product-footer">
+                        <span class="product-price">${formatMoney(prod.price)}</span>
+                        <button type="button" class="btn-add-cart" onclick="addToCart('${prod.id}')">
+                            + Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // AGREGAR AL CARRITO
+        window.addToCart = function(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    img: product.img,
+                    qty: 1
+                });
+            }
+
+            saveCart();
+            updateCartUI();
+            showToast(`🛒 "${product.name}" agregado al carrito`);
+        };
+
+        // CAMBIAR CANTIDAD
+        window.updateQty = function(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+
+            saveCart();
+            updateCartUI();
+        };
+
+        // ELIMINAR DEL CARRITO
+        window.removeFromCart = function(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            saveCart();
+            updateCartUI();
+        };
+
+        // GUARDAR EN LOCALSTORAGE
+        function saveCart() {
+            localStorage.setItem('limpiox_cart', JSON.stringify(cart));
+        }
+
+        // ACTUALIZAR INTERFAZ DEL CARRITO
+        function updateCartUI() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartCounter.textContent = totalQty;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="empty-cart-msg">
+                        <p style="font-size: 2.2rem; margin-bottom: 0.5rem;">🛒</p>
+                        <strong>Tu carrito está vacío</strong>
+                        <p style="font-size: 0.85rem; margin-top: 0.4rem;">Explora los productos y agrega lo que necesites.</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = '$ 0 COP';
+                cartTotal.textContent = '$ 0 COP';
+                return;
+            }
+
+            cartItemsList.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${formatMoney(item.price * item.qty)}</div>
+                        <div class="cart-qty-ctrl">
+                            <button type="button" class="btn-qty" onclick="updateQty('${item.id}', -1)">-</button>
+                            <span class="qty-num">${item.qty}</span>
+                            <button type="button" class="btn-qty" onclick="updateQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-del-item" onclick="removeFromCart('${item.id}')" title="Eliminar">🗑</button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            cartSubtotal.textContent = formatMoney(total);
+            cartTotal.textContent = formatMoney(total);
+        }
+
+        // EVENTOS DE CONTROL
+        categoryTabs.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cat-tab')) {
+                document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.dataset.cat;
+                renderProducts();
+            }
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim();
+            renderProducts();
+        });
+
+        // ABRIR Y CERRAR CARRITO
+        function toggleCart(open) {
+            if (open) {
+                cartDrawer.classList.add('open');
+                cartOverlay.classList.add('open');
+            } else {
+                cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('open');
+            }
+        }
+
+        btnOpenCart.addEventListener('click', () => toggleCart(true));
+        btnCloseCart.addEventListener('click', () => toggleCart(false));
+        cartOverlay.addEventListener('click', () => toggleCart(false));
+
+        // VACIAR CARRITO
+        btnClearCart.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+                cart = [];
+                saveCart();
+                updateCartUI();
+                showToast('Carrito vaciado');
+            }
+        });
+
+        // MODAL DE CHECKOUT
+        btnOpenCheckout.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. Agrega al menos un producto antes de continuar.');
+                return;
+            }
+            toggleCart(false);
+            checkoutModal.style.display = 'flex';
+        });
+
+        btnCloseModal.addEventListener('click', () => {
+            checkoutModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) {
+                checkoutModal.style.display = 'none';
+            }
+        });
+
+        // ENVÍO DE PEDIDO POR WHATSAPP
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('client-name').value.trim();
+            const address = document.getElementById('client-address').value.trim();
+            const notes = document.getElementById('client-notes').value.trim();
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Construir mensaje detallado
+            let message = `🛒 *NUEVO PEDIDO - LIMPIOX STORE*\n`;
+            message += `---------------------------------\n`;
+            message += `👤 *Cliente:* ${name}\n`;
+            message += `📍 *Dirección:* ${address}\n`;
+            if (notes) message += `📝 *Notas:* ${notes}\n`;
+            message += `---------------------------------\n`;
+            message += `📦 *PRODUCTOS:*\n`;
+
+            cart.forEach(item => {
+                message += `• ${item.qty}x ${item.name} - ${formatMoney(item.price * item.qty)}\n`;
+            });
+
+            message += `---------------------------------\n`;
+            message += `💰 *TOTAL A PAGAR:* ${formatMoney(total)}\n\n`;
+            message += `_Mensaje generado automáticamente desde el catálogo web._`;
+
+            // Número de WhatsApp del contacto
+            const phone = '573053839140';
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+            // Abrir WhatsApp en nueva pestaña
+            window.open(whatsappUrl, '_blank');
+
+            // Limpiar y resetear
+            checkoutModal.style.display = 'none';
+            checkoutForm.reset();
+            showToast('¡Pedido enviado a WhatsApp con éxito!');
+        });
+
+        // INICIALIZACIÓN
+        renderProducts();
+        updateCartUI();
+    </script>
+</body>
+</html>

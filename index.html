@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Frontend | Estudiante & Desarrollador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #d8d8d8;
+            --bg-card: #e5e5e5;
+            --dark-main: #121212;
+            --red-glow: #ff1a1a;
+            --red-bright: #e60000;
+            --red-hover: #cc0000;
+            --text-dark: #121212;
+            --text-muted: #555555;
+            --white: #ffffff;
+            --border-width: 2px;
+            --shadow-hard: 5px 5px 0px var(--dark-main);
+            --shadow-hover: 7px 7px 0px var(--red-bright);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Efectos de brillo de fondo */
+        .gradient-glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, var(--red-glow) 0%, rgba(255, 26, 26, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.75;
+        }
+
+        .glow-top-right { top: -40px; right: -80px; }
+        .glow-middle-left { top: 20px; left: -100px; }
+        .glow-middle-right { top: 20px; right: -80px; }
+        .glow-cv { top: 50px; right: -70px; }
+        .glow-bottom-right { top: 40px; right: -80px; }
+        .glow-bottom-left { bottom: -50px; left: -80px; }
+
+        /* Encabezado y Navegación */
+        .header {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: var(--border-width) solid var(--dark-main);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: var(--border-width) solid var(--white);
+            padding: 0.25rem 0.65rem;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .brand-logo:hover {
+            background-color: var(--red-bright);
+            border-color: var(--red-bright);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.3rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.nav-highlight {
+            color: var(--red-bright);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropbtn:hover {
+            color: var(--red-bright);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--dark-main);
+            min-width: 190px;
+            border: var(--border-width) solid var(--white);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            color: var(--white);
+            border-bottom: 1px solid #333333;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--red-bright);
+            color: var(--white) !important;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Botones estilo Neo-Brutalista */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.3rem;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            border: var(--border-width) solid var(--dark-main);
+            transition: all 0.2s ease;
+            box-shadow: 3px 3px 0px var(--dark-main);
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--dark-main);
+        }
+
+        .btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .btn-dark {
+            background-color: var(--dark-main);
+            color: var(--white);
+        }
+
+        .btn-dark:hover {
+            background-color: #222222;
+            color: var(--white);
+        }
+
+        .btn-red {
+            background: var(--red-bright);
+            color: var(--white);
+            border-color: var(--dark-main);
+        }
+
+        .btn-red:hover {
+            background: var(--red-hover);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--dark-main);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--dark-main);
+            color: var(--white);
+        }
+
+        .btn-sm {
+            padding: 0.45rem 0.85rem;
+            font-size: 0.75rem;
+        }
+
+        /* Placeholders & Cards */
+        .img-placeholder {
+            background-color: #bbbbbb;
+            border: var(--border-width) solid var(--dark-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-placeholder span {
+            z-index: 2;
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid var(--red-bright);
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            padding: 8rem 0 4rem 0;
+            position: relative;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 2.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge-tag {
+            display: inline-block;
+            background: var(--dark-main);
+            color: var(--red-bright);
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--dark-main);
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 0.98;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-desc {
+            max-width: 480px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Marco y Contenedor Profesional de la Foto */
+        .hero-image-block {
+            position: relative;
+        }
+
+        .hero-photo-wrapper {
+            position: relative;
+            border: 3px solid var(--dark-main);
+            background-color: var(--dark-main);
+            box-shadow: 8px 8px 0px var(--dark-main);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hero-photo-wrapper:hover {
+            box-shadow: 10px 10px 0px var(--red-bright);
+            transform: translate(-3px, -3px);
+        }
+
+        .hero-photo {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: center 20%;
+            display: block;
+            filter: contrast(1.04) brightness(1.02);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-photo-wrapper:hover .hero-photo {
+            transform: scale(1.03);
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(18, 18, 18, 0.95);
+            color: var(--white);
+            border: 1px solid var(--red-bright);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--red-bright);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--red-bright);
+            animation: pulse-dot 1.8s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.8; }
+        }
+
+        /* Banner Newsletter */
+        .banner-newsletter {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 1.2rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+        }
+
+        .banner-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .banner-input {
+            background: transparent;
+            border: 1px solid #777777;
+            color: var(--white);
+            padding: 0.6rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+
+        .banner-input:focus {
+            outline: none;
+            border-color: var(--red-bright);
+        }
+
+        /* SOBRE MÍ */
+        .about-section {
+            padding: 4.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 2.8rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-img {
+            height: 290px;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--red-bright);
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .about-text p {
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* SECCIÓN HOJA DE VIDA (NUEVA Y PROFESIONAL) */
+        .cv-section {
+            padding: 4.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .cv-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cv-card {
+            background-color: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 2rem;
+            box-shadow: var(--shadow-hard);
+            transition: all 0.25s ease;
+        }
+
+        .cv-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cv-card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            padding-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cv-subtitle {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 1.2rem 0 0.6rem 0;
+            color: var(--dark-main);
+            letter-spacing: 0.5px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-pill {
+            background: var(--dark-main);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--dark-main);
+            letter-spacing: 0.5px;
+        }
+
+        .skill-pill:hover {
+            border-color: var(--red-bright);
+            color: var(--red-bright);
+        }
+
+        .cv-timeline-item {
+            border-left: 3px solid var(--red-bright);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cv-item-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .cv-item-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Área Interactiva para Subir Hoja de Vida */
+        .cv-upload-zone {
+            border: 2px dashed var(--dark-main);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+
+        .cv-upload-zone:hover,
+        .cv-upload-zone.dragover {
+            background: #ffffff;
+            border-color: var(--red-bright);
+            border-style: solid;
+            box-shadow: 4px 4px 0px var(--dark-main);
+        }
+
+        .upload-icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .upload-text {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--dark-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .upload-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .cv-file-status {
+            background-color: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 1rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 3px 3px 0px var(--dark-main);
+        }
+
+        .file-info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .file-icon-badge {
+            background: var(--dark-main);
+            color: var(--red-bright);
+            padding: 0.5rem 0.7rem;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .file-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            word-break: break-all;
+        }
+
+        .file-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cv-instruction-box {
+            background: rgba(18, 18, 18, 0.05);
+            border-left: 4px solid var(--dark-main);
+            padding: 0.9rem 1rem;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .cv-instruction-box strong {
+            color: var(--dark-main);
+        }
+
+        .cv-instruction-box code {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 0.15rem 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        /* SERVICIOS */
+        .services-section {
+            padding: 4.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            border-top: 4px solid var(--dark-main);
+            padding: 1.8rem;
+            box-shadow: var(--shadow-hard);
+            transition: all 0.25s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-top-color: var(--red-bright);
+        }
+
+        .service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+        }
+
+        .service-card p {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+
+        /* PROYECTOS */
+        .portfolio-section {
+            padding: 4.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-card {
+            background-color: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 1.4rem;
+            box-shadow: var(--shadow-hard);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .portfolio-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .project-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            border: 1px solid var(--dark-main);
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .portfolio-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-card p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        /* CONTACTO */
+        .contact-section {
+            padding: 4.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card {
+            background-color: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow-hard);
+            transition: all 0.25s ease;
+        }
+
+        .contact-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .contact-card p {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: var(--border-width) solid var(--dark-main);
+        }
+
+        /* MODAL DE PREVISUALIZACIÓN */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-box {
+            background-color: var(--bg-card);
+            border: 3px solid var(--dark-main);
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 10px 10px 0px var(--dark-main);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .modal-header {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 0.5rem;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--red-bright);
+        }
+
+        .modal-body {
+            padding: 1.2rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .modal-iframe {
+            width: 100%;
+            height: 520px;
+            border: 2px solid var(--dark-main);
+            background: #ffffff;
+        }
+
+        /* Notificación Toast */
+        .toast-notification {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--dark-main);
+            color: var(--white);
+            border: 2px solid var(--red-bright);
+            padding: 0.85rem 1.4rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            z-index: 10000;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 868px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-desc {
+                margin: 0 auto 1.8rem auto;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-photo-wrapper {
+                max-width: 380px;
+                margin: 0 auto;
+            }
+
+            .about-grid,
+            .cv-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.6rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado con Menú Principal -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#inicio" class="brand-logo">[ MI PORTAFOLIO ]</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="#hoja-de-vida" class="nav-highlight">Hoja de Vida</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li class="dropdown">
+                        <button class="dropbtn" type="button">Más ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#proyectos">Proyectos</a>
+                            <a href="catalogo.html" style="color: var(--white); font-weight: 700;">🛒 Tienda Demo ↗</a>
+                            <a href="peliculas_juegos.html" style="color: var(--red-bright); font-weight: 700;">🎬 Cine & Gamer Hub ↗</a>
+                            <a href="#contacto">Contacto</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN DE INICIO / HERO -->
+        <section id="inicio" class="hero-section">
+            <div class="gradient-glow glow-top-right"></div>
+            <div class="container hero-grid">
+                <div class="hero-text-block">
+                    <span class="hero-badge-tag">[ DESARROLLADOR WEB ]</span>
+                    <h1 class="hero-title">
+                        ESTUDIANTE ↗<br>
+                        FRONTEND<br>
+                        [ EN PROCESO ]
+                    </h1>
+                    <p class="hero-desc">
+                        Página web profesional enfocada en maquetación semántica con HTML5, diseño moderno en CSS3 y componentes interactivos con JavaScript.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#hoja-de-vida" class="btn btn-red">📄 Ver Hoja de Vida</a>
+                        <a href="#contacto" class="btn btn-dark">Contáctame ↗</a>
+                    </div>
+                </div>
+                
+                <!-- FOTO PERSONAL ADJUNTADA AL CÓDIGO -->
+                <div class="hero-image-block">
+                    <div class="hero-photo-wrapper">
+                        <img src="FOTO.jpg" alt="Foto Personal Profesional" class="hero-photo" id="hero-profile-photo">
+                        <div class="hero-photo-badge">
+                            <span class="status-dot"></span> [ DISPONIBLE PARA PROYECTOS ]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER BOLETÍN INFORMATIVO -->
+        <section class="banner-newsletter">
+            <div class="container banner-flex">
+                <span><strong>BOLETÍN INFORMATIVO</strong> — Recibe actualizaciones de mis proyectos</span>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <input type="text" placeholder="Tu nombre o correo" class="banner-input">
+                    <a href="#contacto" class="btn btn-red btn-sm">ENVIAR</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN SOBRE MÍ -->
+        <section id="sobre-mi" class="about-section">
+            <div class="gradient-glow glow-middle-left"></div>
+            <div class="container about-grid">
+                <div class="img-placeholder about-img">
+                    <span>[ CÓDIGO & DISEÑO FRONTEND ]</span>
+                </div>
+                <div class="about-text">
+                    <span class="section-tag">[ FORMACIÓN & OBJETIVOS ]</span>
+                    <h2 class="section-heading">SOBRE ESTE PROYECTO</h2>
+                    <p>
+                        Este portafolio es un proyecto de desarrollo web enfocado en la estructura semántica de HTML5, estilizado profesional mediante CSS y la integración de componentes interactivos y dinámicos en JavaScript.
+                    </p>
+                    <p>
+                        Diseñado con una estética neo-brutalista de alto contraste que combina funcionalidad, alto rendimiento y una presencia visual limpia y vanguardista.
+                    </p>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#hoja-de-vida" class="btn btn-dark btn-sm">Explorar Mi Hoja de Vida ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN COMPLETA DE HOJA DE VIDA / CV -->
+        <section id="hoja-de-vida" class="cv-section">
+            <div class="gradient-glow glow-cv"></div>
+            <div class="container">
+                <div class="cv-header-flex">
+                    <div>
+                        <span class="section-tag">[PERFIL PROFESIONAL]</span>
+                        <h2 class="section-heading" style="margin-bottom: 0.3rem;">MI HOJA DE VIDA</h2>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            Consulta mi trayectoria o sube y actualiza tu propio archivo curricular.
+                        </p>
+                    </div>
+                    <div>
+                        <!-- Botón principal de descarga enlazado al PDF -->
+                        <a href="hoja_de_vida.pdf" id="cv-download-btn" download="Hoja_de_Vida_Frontend.pdf" class="btn btn-red">
+                            ⬇ Descargar Hoja de Vida (PDF)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cv-grid">
+                    <!-- Tarjeta 1: Resumen Curricular -->
+                    <div class="cv-card">
+                        <div class="cv-card-title">
+                            <span>Resumen Curricular</span>
+                            <span style="font-size: 0.8rem; color: var(--red-bright);">[FRONTEND]</span>
+                        </div>
+                        <p style="font-size: 0.92rem; margin-bottom: 1rem;">
+                            Estudiante con sólida vocación en programación web, maquetación de interfaces responsivas y diseño interactivo. Orientado a la resolución de problemas y buenas prácticas en la web moderna.
+                        </p>
+
+                        <div class="cv-subtitle">Habilidades Técnicas Clave</div>
+                        <div class="skills-container">
+                            <span class="skill-pill">HTML5 Semántico</span>
+                            <span class="skill-pill">CSS3 Moderno</span>
+                            <span class="skill-pill">Flexbox & CSS Grid</span>
+                            <span class="skill-pill">JavaScript ES6+</span>
+                            <span class="skill-pill">Diseño Responsivo</span>
+                            <span class="skill-pill">Manipulación del DOM</span>
+                            <span class="skill-pill">Control de Versiones (Git)</span>
+                        </div>
+
+                        <div class="cv-subtitle">Educación y Proyectos</div>
+                        <div class="cv-timeline-item">
+                            <div class="cv-item-title">Desarrollo Web Frontend</div>
+                            <div class="cv-item-meta">Proyecto de Formación Técnica • 2026</div>
+                        </div>
+                        <div class="cv-timeline-item">
+                            <div class="cv-item-title">Catálogos Web y Aplicaciones Comerciales</div>
+                            <div class="cv-item-meta">Desarrollo de interfaces para productos de limpieza</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Módulo Profesional para Subir y Gestionar la Hoja de Vida -->
+                    <div class="cv-card">
+                        <div class="cv-card-title">
+                            <span>Cargar / Actualizar Hoja de Vida</span>
+                            <span style="font-size: 0.8rem; color: var(--red-bright);">[GESTIÓN]</span>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: var(--text-dark); margin-bottom: 1rem;">
+                            Sube aquí tu archivo en formato PDF o Word para vincularlo a tu portafolio y previsualizarlo de inmediato:
+                        </p>
+
+                        <!-- Zona Drag & Drop para Cargar Archivo -->
+                        <div class="cv-upload-zone" id="cv-drop-zone" tabindex="0" role="button" aria-label="Cargar archivo de hoja de vida">
+                            <div class="upload-icon">📄</div>
+                            <div class="upload-text">Arrastra y suelta tu Hoja de Vida aquí</div>
+                            <div class="upload-hint">o haz clic para seleccionar tu archivo (PDF, DOC, DOCX)</div>
+                            <input type="file" id="cv-file-input" accept=".pdf,.doc,.docx" style="display: none;">
+                        </div>
+
+                        <!-- Barra de Estado del Archivo Actual / Subido -->
+                        <div class="cv-file-status" id="cv-status-card">
+                            <div class="file-info-row">
+                                <div class="file-details">
+                                    <div class="file-icon-badge">PDF</div>
+                                    <div>
+                                        <div class="file-name" id="cv-display-filename">hoja_de_vida.pdf</div>
+                                        <div class="file-meta" id="cv-display-filesize">Documento listo para descarga • 2.5 KB</div>
+                                    </div>
+                                </div>
+                                <div class="file-actions">
+                                    <button type="button" class="btn btn-dark btn-sm" id="btn-preview-modal">Previsualizar</button>
+                                    <button type="button" class="btn btn-outline btn-sm" id="btn-reset-cv" title="Restaurar archivo original">Reiniciar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instrucciones Claras y Profesionales -->
+                        <div class="cv-instruction-box">
+                            <strong>💡 Cómo agregar tu documento oficial:</strong><br>
+                            1. Puedes usar la zona de arriba para subir tu archivo en el navegador.<br>
+                            2. O simplemente coloca tu archivo con el nombre <code>hoja_de_vida.pdf</code> dentro de la carpeta <code>PORTAFOLIO</code> y se conectará automáticamente al botón de descarga.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN SERVICIOS -->
+        <section id="servicios" class="services-section">
+            <div class="gradient-glow glow-middle-right"></div>
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <span class="section-tag">[ ESPECIALIDADES ]</span>
+                    <h2 class="section-heading">ÁREAS DE DESARROLLO</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>1. Maquetación HTML5</h3>
+                        <p>Estructuración semántica, jerarquía limpia de contenidos y buenas prácticas de accesibilidad.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>2. Estilos CSS3 Modernos</h3>
+                        <p>Diseño con Flexbox, CSS Grid, variables CSS, micro-interacciones y maquetación 100% responsiva.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>3. JavaScript Interactivo</h3>
+                        <p>Manipulación avanzada del DOM, eventos de usuario, validaciones y carga interactiva de archivos.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>4. Optimización y Pruebas</h3>
+                        <p>Corrección de detalles visuales, pruebas en diferentes dispositivos y validación de sintaxis web.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PROYECTOS -->
+        <section id="proyectos" class="portfolio-section">
+            <div class="gradient-glow glow-bottom-right"></div>
+            <div class="container">
+                <span class="section-tag">[ TRABAJOS REALIZADOS ]</span>
+                <h2 class="section-heading">MIS PROYECTOS</h2>
+                <div class="portfolio-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+                    <div class="portfolio-card" style="border: 3px solid var(--red-bright);">
+                        <div class="img-placeholder project-img" style="background:#121212; color:#fff; display: flex; flex-direction: column; gap: 6px; padding: 1.2rem; text-align: center;">
+                            <span style="border-color: var(--red-bright);">[ E-COMMERCE ACTIVO ]</span>
+                            <div style="font-size: 0.8rem; color: #ff9999; font-weight: 700; letter-spacing: 0.5px;">CARRITO • FILTROS • WHATSAPP</div>
+                        </div>
+                        <h3>LimpioX Store: Catálogo & Carrito</h3>
+                        <p>Aplicación web comercial completa: buscador en tiempo real, filtros por categoría, carrito interactivo con persistencia y pedido automático por WhatsApp.</p>
+                        <a href="catalogo.html" class="btn btn-red">Probar E-Commerce en Vivo ↗</a>
+                    </div>
+                    <div class="portfolio-card" style="border: 3px solid var(--dark-main);">
+                        <div class="img-placeholder project-img" style="background:#121212; color:#fff; display: flex; flex-direction: column; gap: 6px; padding: 1.2rem; text-align: center;">
+                            <span style="border-color: #ffd700; color: #ffd700;">[ MULTIMEDIA HUB ]</span>
+                            <div style="font-size: 0.8rem; color: #ffffff; font-weight: 700; letter-spacing: 0.5px;">TRÁILERS • GÉNEROS • FAVORITOS</div>
+                        </div>
+                        <h3>Explorador de Cine & Videojuegos</h3>
+                        <p>Plataforma interactiva de entretenimiento: búsqueda instantánea, tráilers en YouTube, puntuaciones y gestión de favoritos en LocalStorage.</p>
+                        <a href="peliculas_juegos.html" class="btn btn-dark">Explorar Hub 🎬 ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CONTACTO -->
+        <section id="contacto" class="contact-section">
+            <div class="gradient-glow glow-bottom-left"></div>
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <span class="section-tag">[ HABLEMOS ]</span>
+                    <h2 class="section-heading">CONTACTO</h2>
+                    <p style="color: var(--text-muted);">¿Tienes una oportunidad o proyecto en mente? ¡Ponte en contacto conmigo!</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <p>Escríbeme por WhatsApp:</p>
+                        <a href="https://wa.me/573053839140" target="_blank" rel="noopener noreferrer" class="btn btn-dark">WhatsApp: 3053839140</a>
+                    </div>
+                    <div class="contact-card">
+                        <p>Visita mi Instagram:</p>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Instagram</a>
+                    </div>
+                    <div class="contact-card">
+                        <p>Mándame un correo directo:</p>
+                        <a href="mailto:estudiante@ejemplo.com" class="btn btn-red">Enviar Correo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 - Portafolio de Desarrollo Web Frontend. Diseñado con altos estándares profesionales.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE PREVISUALIZACIÓN DE HOJA DE VIDA -->
+    <div class="modal-overlay" id="preview-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span id="modal-title">[ PREVISUALIZACIÓN DE HOJA DE VIDA ]</span>
+                <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Cerrar ventana">&times;</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="cv-preview-frame" src="hoja_de_vida.pdf" class="modal-iframe" title="Visor de Hoja de Vida"></iframe>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Visualizador nativo de documentos</span>
+                    <a href="hoja_de_vida.pdf" id="modal-download-link" download="Hoja_de_Vida.pdf" class="btn btn-red btn-sm">⬇ Descargar Archivo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div class="toast-notification" id="toast-message">
+        Documento actualizado correctamente.
+    </div>
+
+    <!-- LÓGICA DE JAVASCRIPT: GESTIÓN DE HOJA DE VIDA, CARGA Y PREVISUALIZACIÓN -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropZone = document.getElementById('cv-drop-zone');
+            const fileInput = document.getElementById('cv-file-input');
+            const downloadBtn = document.getElementById('cv-download-btn');
+            const modalDownloadLink = document.getElementById('modal-download-link');
+            const displayFilename = document.getElementById('cv-display-filename');
+            const displayFilesize = document.getElementById('cv-display-filesize');
+            const btnPreviewModal = document.getElementById('btn-preview-modal');
+            const btnResetCv = document.getElementById('btn-reset-cv');
+            const previewModal = document.getElementById('preview-modal');
+            const btnCloseModal = document.getElementById('btn-close-modal');
+            const previewFrame = document.getElementById('cv-preview-frame');
+            const toast = document.getElementById('toast-message');
+
+            const DEFAULT_FILE = 'hoja_de_vida.pdf';
+            let currentBlobUrl = null;
+
+            // Función para mostrar mensajes de confirmación (Toast)
+            function showToast(message) {
+                toast.textContent = message;
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3500);
+            }
+
+            // Formatear tamaño de archivo en KB / MB
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+                else return (bytes / 1048576).toFixed(2) + ' MB';
+            }
+
+            // Procesar el archivo seleccionado o arrastrado
+            function handleSelectedFile(file) {
+                if (!file) return;
+
+                // Revocar URL previa de memoria si existía
+                if (currentBlobUrl) {
+                    URL.revokeObjectURL(currentBlobUrl);
+                }
+
+                currentBlobUrl = URL.createObjectURL(file);
+
+                // Actualizar interfaz con datos del archivo nuevo
+                displayFilename.textContent = file.name;
+                displayFilesize.textContent = `${formatFileSize(file.size)} • Subido ahora`;
+
+                // Actualizar botones de descarga
+                downloadBtn.href = currentBlobUrl;
+                downloadBtn.download = file.name;
+                modalDownloadLink.href = currentBlobUrl;
+                modalDownloadLink.download = file.name;
+
+                // Actualizar visor de previsualización
+                previewFrame.src = currentBlobUrl;
+
+                showToast(`✅ ¡"${file.name}" cargado y listo para descarga!`);
+            }
+
+            // Eventos del Área de Carga (Click y Drag & Drop)
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    handleSelectedFile(e.target.files[0]);
+                }
+            });
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.classList.add('dragover');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.classList.remove('dragover');
+                }, false);
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                if (dt && dt.files && dt.files[0]) {
+                    handleSelectedFile(dt.files[0]);
+                }
+            });
+
+            // Soporte de accesibilidad para la zona de carga (tecla Enter / Espacio)
+            dropZone.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    fileInput.click();
+                }
+            });
+
+            // Botón de Previsualización (Abre el Modal)
+            btnPreviewModal.addEventListener('click', () => {
+                previewModal.style.display = 'flex';
+            });
+
+            // Cerrar Modal
+            btnCloseModal.addEventListener('click', () => {
+                previewModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === previewModal) {
+                    previewModal.style.display = 'none';
+                }
+            });
+
+            // Botón de Reiniciar a archivo original
+            btnResetCv.addEventListener('click', () => {
+                if (currentBlobUrl) {
+                    URL.revokeObjectURL(currentBlobUrl);
+                    currentBlobUrl = null;
+                }
+                fileInput.value = '';
+                displayFilename.textContent = DEFAULT_FILE;
+                displayFilesize.textContent = 'Documento listo para descarga • 2.5 KB';
+                downloadBtn.href = DEFAULT_FILE;
+                downloadBtn.download = 'Hoja_de_Vida_Frontend.pdf';
+                modalDownloadLink.href = DEFAULT_FILE;
+                modalDownloadLink.download = 'Hoja_de_Vida_Frontend.pdf';
+                previewFrame.src = DEFAULT_FILE;
+                showToast('Archivo restaurado a la versión predeterminada.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1250 >>
+stream
+BT
+/F2 24 Tf
+50 730 Td
+(HOJA DE VIDA / CURRICULUM VITAE) Tj
+
+/F1 14 Tf
+0 -30 Td
+(Desarrollador Frontend | Estudiante de Desarrollo Web) Tj
+
+/F1 10 Tf
+0 -20 Td
+(Email: estudiante@ejemplo.com | Telefono / WhatsApp: +57 305 383 9140) Tj
+0 -15 Td
+(Portafolio Web Profesional | Colombia) Tj
+
+/F2 14 Tf
+0 -35 Td
+(PERFIL PROFESIONAL) Tj
+/F1 10 Tf
+0 -18 Td
+(Entusiasta y estudiante de desarrollo web frontend con formacion practica en maquetacion semantica,) Tj
+0 -14 Td
+(diseno visual responsivo y programacion de componentes interactivos. Enfoque en codigo limpio,) Tj
+0 -14 Td
+(solucion de problemas y creacion de interfaces de usuario modernas y atractivas.) Tj
+
+/F2 14 Tf
+0 -35 Td
+(HABILIDADES TECNICAS) Tj
+/F1 10 Tf
+0 -18 Td
+(- HTML5: Estructuras semanticas, accesibilidad, formularios y optimizacion.) Tj
+0 -15 Td
+(- CSS3: Diseno responsivo, Flexbox, CSS Grid, animaciones y estetica neo-brutalista.) Tj
+0 -15 Td
+(- JavaScript: Manipulacion del DOM, eventos interactivos y logica funcional.) Tj
+0 -15 Td
+(- Herramientas: Git, GitHub, navegadores modernos y editores de codigo.) Tj
+
+/F2 14 Tf
+0 -35 Td
+(PROYECTOS DESTACADOS) Tj
+/F1 10 Tf
+0 -18 Td
+(- Portafolio Web Personal: Maquetacion completa, integracion de multimedia y funciones JS.) Tj
+0 -15 Td
+(- Catalogo Comercial LimpioX: Seccion web de catalogo de productos de limpieza.) Tj
+0 -15 Td
+(- Catalogo Desengrasante Multiusos: Seccion comercial de productos para el hogar.) Tj
+
+/F2 14 Tf
+0 -35 Td
+(EDUCACION Y FORMACION) Tj
+/F1 10 Tf
+0 -18 Td
+(- Formacion en Desarrollo Frontend / Maquetacion Web - 2026) Tj
+0 -15 Td
+(- Proyectos Practicos y Evaluaciones de Desarrollo de Software) Tj
+
+/F1 9 Tf
+0 -40 Td
+([ Documento generado como plantilla oficial del Portafolio. Puedes reemplazar este archivo ] Tj
+0 -12 Td
+([ colocando tu propia Hoja de Vida con el nombre 'hoja_de_vida.pdf' o usando el cargador web. ] Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000262 00000 n 
+0000001563 00000 n 
+0000001633 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1708
+%%EOF

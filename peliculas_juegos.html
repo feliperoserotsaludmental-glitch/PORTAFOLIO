@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine & Gamer Hub | Explorador de Películas y Videojuegos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #d8d8d8;
+            --bg-card: #e5e5e5;
+            --dark-main: #121212;
+            --red-glow: #ff1a1a;
+            --red-bright: #e60000;
+            --red-hover: #cc0000;
+            --text-dark: #121212;
+            --text-muted: #555555;
+            --white: #ffffff;
+            --border-width: 2px;
+            --shadow-hard: 5px 5px 0px var(--dark-main);
+            --shadow-hover: 7px 7px 0px var(--red-bright);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* HEADER */
+        .hub-header {
+            background-color: var(--dark-main);
+            color: var(--white);
+            padding: 0.9rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 990;
+            border-bottom: var(--border-width) solid var(--dark-main);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .hub-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: var(--border-width) solid var(--white);
+            padding: 0.25rem 0.65rem;
+            transition: all 0.2s ease;
+        }
+
+        .hub-logo:hover {
+            background-color: var(--red-bright);
+            border-color: var(--red-bright);
+        }
+
+        .btn-back-portfolio {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .btn-back-portfolio:hover {
+            color: var(--red-bright);
+        }
+
+        /* BOTÓN DE FAVORITOS EN HEADER */
+        .fav-trigger-btn {
+            background: var(--dark-main);
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 0.5rem 1.1rem;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        .fav-trigger-btn:hover,
+        .fav-trigger-btn.active {
+            background: var(--red-bright);
+            border-color: var(--red-bright);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.7);
+        }
+
+        .fav-count-badge {
+            background: var(--white);
+            color: var(--dark-main);
+            border-radius: 50%;
+            padding: 0.15rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* HERO BANNER */
+        .hub-hero {
+            background-color: #cfcfcf;
+            padding: 3rem 0 2.5rem 0;
+            border-bottom: var(--border-width) solid var(--dark-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-hero-glow {
+            position: absolute;
+            top: -50px;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--red-glow) 0%, rgba(255, 26, 26, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--dark-main);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.6rem;
+            border: 1px solid var(--red-bright);
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-main-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-main-subtitle {
+            font-size: 1rem;
+            color: var(--text-dark);
+            max-width: 650px;
+            font-weight: 500;
+        }
+
+        /* CONTROLES: SELECCIÓN DE MEDIO Y FILTROS */
+        .controls-section {
+            background-color: var(--bg-card);
+            border-bottom: var(--border-width) solid var(--dark-main);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 61px;
+            z-index: 900;
+        }
+
+        .controls-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .media-type-tabs {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .type-tab {
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            color: var(--dark-main);
+            padding: 0.55rem 1.1rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 3px 3px 0px var(--dark-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .type-tab:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--dark-main);
+        }
+
+        .type-tab.active {
+            background: var(--dark-main);
+            color: var(--white);
+            border-color: var(--dark-main);
+        }
+
+        .search-wrapper {
+            position: relative;
+            flex-grow: 1;
+            max-width: 350px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.6rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--red-bright);
+        }
+
+        .controls-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+        }
+
+        .genre-chips {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .chip-btn {
+            background: transparent;
+            border: 1px solid var(--dark-main);
+            padding: 0.25rem 0.6rem;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.15s ease;
+        }
+
+        .chip-btn:hover,
+        .chip-btn.active {
+            background: var(--dark-main);
+            color: var(--white);
+        }
+
+        .sort-select {
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.4rem 0.7rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 2px 2px 0px var(--dark-main);
+            cursor: pointer;
+        }
+
+        /* GRID DE ITEMS */
+        .media-section {
+            padding: 3rem 0;
+            flex-grow: 1;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .media-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--dark-main);
+            box-shadow: var(--shadow-hard);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .media-poster-box {
+            height: 290px;
+            width: 100%;
+            background: #222222;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--dark-main);
+        }
+
+        .media-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .media-card:hover .media-poster {
+            transform: scale(1.05);
+        }
+
+        .rating-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--dark-main);
+            color: #ffd700;
+            border: 1px solid var(--white);
+            padding: 0.25rem 0.55rem;
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .type-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(18, 18, 18, 0.9);
+            color: var(--white);
+            border: 1px solid var(--red-bright);
+            padding: 0.2rem 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .media-card-body {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .media-year-genre {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .media-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+
+        .media-synopsis {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            line-height: 1.45;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .media-card-footer {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            border-top: 1px solid #cccccc;
+            padding-top: 0.8rem;
+            margin-top: auto;
+        }
+
+        .btn-view-details {
+            background: var(--dark-main);
+            color: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            padding: 0.55rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .btn-view-details:hover {
+            background: var(--red-bright);
+            border-color: var(--red-bright);
+        }
+
+        .btn-fav-toggle {
+            background: var(--white);
+            border: var(--border-width) solid var(--dark-main);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            box-shadow: 2px 2px 0px var(--dark-main);
+        }
+
+        .btn-fav-toggle:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--dark-main);
+        }
+
+        .btn-fav-toggle.is-fav {
+            background: var(--red-bright);
+            color: var(--white);
+            border-color: var(--dark-main);
+        }
+
+        /* MODAL DE DETALLES Y TRÁILER */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 3px solid var(--dark-main);
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            box-shadow: 10px 10px 0px var(--dark-main);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 0.9rem 1.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+        }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .btn-close-modal:hover {
+            color: var(--red-bright);
+        }
+
+        .modal-body {
+            padding: 1.4rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .trailer-container {
+            width: 100%;
+            height: 380px;
+            background: #000000;
+            border: 2px solid var(--dark-main);
+            box-shadow: 4px 4px 0px var(--dark-main);
+        }
+
+        .trailer-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.4rem;
+        }
+
+        .modal-meta-row {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .meta-tag {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .modal-synopsis {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-extra-details {
+            background: rgba(255, 255, 255, 0.6);
+            border-left: 4px solid var(--red-bright);
+            padding: 0.8rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--dark-main);
+            color: var(--white);
+            border: 2px solid var(--red-bright);
+            padding: 0.8rem 1.3rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 3000;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+            display: none;
+            animation: slideToast 0.3s ease;
+        }
+
+        @keyframes slideToast {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* FOOTER */
+        .hub-footer {
+            background: var(--dark-main);
+            color: var(--white);
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: var(--border-width) solid var(--dark-main);
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-main-title {
+                font-size: 2.1rem;
+            }
+            .search-wrapper {
+                max-width: 100%;
+            }
+            .trailer-container {
+                height: 230px;
+            }
+            .modal-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DEL HUB -->
+    <header class="hub-header">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="index.html" class="btn-back-portfolio">← Volver al Portafolio</a>
+                <a href="peliculas_juegos.html" class="hub-logo">[ CINE & GAMER HUB ]</a>
+            </div>
+            <div>
+                <button type="button" class="fav-trigger-btn" id="btn-toggle-favs">
+                    <span>❤️ Favoritos</span>
+                    <span class="fav-count-badge" id="fav-counter">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER HERO -->
+    <section class="hub-hero">
+        <div class="hub-hero-glow"></div>
+        <div class="container">
+            <span class="hero-badge">[ PROYECTO FRONT-END • MULTIMEDIA API & LOCALSTORAGE ]</span>
+            <h1 class="hero-main-title">EXPLORADOR DE CINE<br>& VIDEOJUEGOS ↗</h1>
+            <p class="hero-main-subtitle">
+                Plataforma interactiva para descubrir películas taquilleras y videojuegos de última generación. Incluye búsqueda en tiempo real, filtros por género, tráilers interactivos y guardado de favoritos en el navegador.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTROLES: SELECTOR DE MEDIO, BÚSQUEDA Y GÉNEROS -->
+    <section class="controls-section">
+        <div class="container">
+            <div class="controls-top-row">
+                <div class="media-type-tabs" id="type-tabs">
+                    <button type="button" class="type-tab active" data-type="todos">🌟 Todos</button>
+                    <button type="button" class="type-tab" data-type="pelicula">🎬 Películas</button>
+                    <button type="button" class="type-tab" data-type="juego">🎮 Videojuegos</button>
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" id="search-input" class="search-input" placeholder="🔍 Buscar por título o director/estudio...">
+                </div>
+            </div>
+
+            <div class="controls-bottom-row">
+                <div class="genre-chips" id="genre-chips">
+                    <!-- Géneros inyectados por JavaScript -->
+                </div>
+                <div>
+                    <select id="sort-select" class="sort-select" aria-label="Ordenar resultados">
+                        <option value="rating-desc">⭐ Mayor Puntuación</option>
+                        <option value="year-desc">📅 Más Recientes</option>
+                        <option value="name-asc">🔤 Título (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LISTADO DE MEDIOS -->
+    <main class="media-section">
+        <div class="container">
+            <div class="media-grid" id="media-container">
+                <!-- Se inyecta dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE DETALLES Y TRÁILER -->
+    <div class="modal-overlay" id="detail-modal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span id="modal-header-badge">[ DETALLES & TRÁILER OFICIAL ]</span>
+                <button type="button" class="btn-close-modal" id="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-content-body">
+                <!-- Contenido dinámico del modal -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div class="toast" id="toast-msg">Acción completada</div>
+
+    <!-- FOOTER -->
+    <footer class="hub-footer">
+        <div class="container">
+            <p>&copy; 2026 Cine & Gamer Hub — Diseñado y programado con HTML5 semántico, CSS3 avanzado y JavaScript Vanilla.</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE JAVASCRIPT: EXPLORADOR MULTIMEDIA -->
+    <script>
+        // BASE DE DATOS LOCAL CURADA (ALTA CALIDAD CON TRÁILERS DE YOUTUBE)
+        const MEDIA_DATABASE = [
+            // --- PELÍCULAS ---
+            {
+                id: 'film-1',
+                type: 'pelicula',
+                title: 'Dune: Parte Dos',
+                year: 2024,
+                genre: 'Ciencia Ficción',
+                rating: 8.6,
+                poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia.',
+                director: 'Denis Villeneuve',
+                duration: '166 min',
+                trailerId: 'Way9Dexny3w' // YouTube ID
+            },
+            {
+                id: 'film-2',
+                type: 'pelicula',
+                title: 'Oppenheimer',
+                year: 2023,
+                genre: 'Drama',
+                rating: 8.9,
+                poster: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'La historia del científico estadounidense J. Robert Oppenheimer y su papel en el desarrollo de la bomba atómica durante la Segunda Guerra Mundial.',
+                director: 'Christopher Nolan',
+                duration: '180 min',
+                trailerId: 'uYPbbksJxIg'
+            },
+            {
+                id: 'film-3',
+                type: 'pelicula',
+                title: 'Spider-Man: Across the Spider-Verse',
+                year: 2023,
+                genre: 'Animación',
+                rating: 8.7,
+                poster: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Miles Morales es catapultado a través del Multiverso, donde se encuentra con un equipo de Spider-Personas encargadas de proteger su existencia.',
+                director: 'Joaquim Dos Santos, Kemp Powers',
+                duration: '140 min',
+                trailerId: 'cqGjhVJWtEg'
+            },
+            {
+                id: 'film-4',
+                type: 'pelicula',
+                title: 'The Dark Knight',
+                year: 2008,
+                genre: 'Acción',
+                rating: 9.0,
+                poster: 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Cuando la amenaza conocida como el Guasón causa estragos y caos en Gotham City, Batman debe aceptar una de las mayores pruebas psicológicas.',
+                director: 'Christopher Nolan',
+                duration: '152 min',
+                trailerId: 'EXeTwQWrcwY'
+            },
+            {
+                id: 'film-5',
+                type: 'pelicula',
+                title: 'Interstellar',
+                year: 2014,
+                genre: 'Ciencia Ficción',
+                rating: 8.7,
+                poster: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Un grupo de exploradores espaciales viaja a través de un agujero de gusano para asegurar la supervivencia de la humanidad.',
+                director: 'Christopher Nolan',
+                duration: '169 min',
+                trailerId: 'zSWdZVtXT7E'
+            },
+
+            // --- VIDEOJUEGOS ---
+            {
+                id: 'game-1',
+                type: 'juego',
+                title: 'Elden Ring',
+                year: 2022,
+                genre: 'RPG',
+                rating: 9.6,
+                poster: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Un juego de rol de acción y fantasía oscura desarrollado por FromSoftware en colaboración con George R. R. Martin en las Tierras Intermedias.',
+                director: 'Hidetaka Miyazaki',
+                duration: 'Plataformas: PC, PS5, Xbox Series X/S',
+                trailerId: 'E3Huy2cdih0'
+            },
+            {
+                id: 'game-2',
+                type: 'juego',
+                title: 'Cyberpunk 2077: Phantom Liberty',
+                year: 2023,
+                genre: 'Mundo Abierto',
+                rating: 8.9,
+                poster: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Una aventura de espionaje y suspenso ambientada en Night City donde juegas como V en el peligroso distrito de Dogtown con Idris Elba.',
+                director: 'CD Projekt RED',
+                duration: 'Plataformas: PC, PS5, Xbox Series X/S',
+                trailerId: '47M3t0dYh4Y'
+            },
+            {
+                id: 'game-3',
+                type: 'juego',
+                title: 'The Witcher 3: Wild Hunt',
+                year: 2015,
+                genre: 'RPG',
+                rating: 9.7,
+                poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Geralt de Rivia, cazador de monstruos a sueldo, viaja por un mundo devastado por la guerra en busca de la Niña de la Profecía.',
+                director: 'Konrad Tomaszkiewicz',
+                duration: 'Plataformas: PC, PlayStation, Xbox, Switch',
+                trailerId: 'c0i88t0Kacs'
+            },
+            {
+                id: 'game-4',
+                type: 'juego',
+                title: 'Red Dead Redemption 2',
+                year: 2018,
+                genre: 'Mundo Abierto',
+                rating: 9.8,
+                poster: 'https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Estados Unidos, 1899. Arthur Morgan y la banda de Van der Linde huyen mientras agentes federales y cazarrecompensas les pisan los talones.',
+                director: 'Rockstar Games',
+                duration: 'Plataformas: PC, PS4, Xbox One',
+                trailerId: 'eaW0tYpxyp0'
+            },
+            {
+                id: 'game-5',
+                type: 'juego',
+                title: 'Grand Theft Auto VI',
+                year: 2025,
+                genre: 'Acción',
+                rating: 9.9,
+                poster: 'https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=800&auto=format&fit=crop&q=80',
+                synopsis: 'Regreso al estado de Leonida y a las calles empapadas de neón de Vice City en la mayor y más inmersiva evolución de GTA hasta la fecha.',
+                director: 'Rockstar Games',
+                duration: 'Plataformas: PS5, Xbox Series X/S',
+                trailerId: 'QdBZY2fkU-0'
+            }
+        ];
+
+        // GESTIÓN DE FAVORITOS EN LOCALSTORAGE
+        let favorites = JSON.parse(localStorage.getItem('cine_gamer_favs')) || [];
+
+        // ESTADO DE LA INTERFAZ
+        let currentType = 'todos';
+        let currentGenre = 'todos';
+        let searchQuery = '';
+        let currentSort = 'rating-desc';
+        let showFavoritesOnly = false;
+
+        // ELEMENTOS DEL DOM
+        const mediaContainer = document.getElementById('media-container');
+        const typeTabs = document.getElementById('type-tabs');
+        const genreChips = document.getElementById('genre-chips');
+        const searchInput = document.getElementById('search-input');
+        const sortSelect = document.getElementById('sort-select');
+        const btnToggleFavs = document.getElementById('btn-toggle-favs');
+        const favCounter = document.getElementById('fav-counter');
+        const detailModal = document.getElementById('detail-modal');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const modalContentBody = document.getElementById('modal-content-body');
+        const toast = document.getElementById('toast-msg');
+
+        // TOAST
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
+        }
+
+        // GUARDAR FAVORITOS
+        function saveFavorites() {
+            localStorage.setItem('cine_gamer_favs', JSON.stringify(favorites));
+            favCounter.textContent = favorites.length;
+        }
+
+        // ALTERNAR FAVORITO
+        window.toggleFavorite = function(id) {
+            const index = favorites.indexOf(id);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast('Eliminado de tus favoritos');
+            } else {
+                favorites.push(id);
+                showToast('❤️ Añadido a tus favoritos');
+            }
+            saveFavorites();
+            renderMedia();
+        };
+
+        // ACTUALIZAR CHIPS DE GÉNERO
+        function updateGenreChips() {
+            let itemsToExtract = MEDIA_DATABASE;
+            if (currentType !== 'todos') {
+                itemsToExtract = MEDIA_DATABASE.filter(i => i.type === currentType);
+            }
+
+            const uniqueGenres = ['todos', ...new Set(itemsToExtract.map(i => i.genre))];
+
+            genreChips.innerHTML = uniqueGenres.map(g => `
+                <button type="button" class="chip-btn ${g === currentGenre ? 'active' : ''}" data-genre="${g}">
+                    ${g === 'todos' ? 'Todos los Géneros' : g}
+                </button>
+            `).join('');
+        }
+
+        // FILTRAR Y ORDENAR
+        function getFilteredMedia() {
+            return MEDIA_DATABASE.filter(item => {
+                if (showFavoritesOnly && !favorites.includes(item.id)) return false;
+                if (!showFavoritesOnly && currentType !== 'todos' && item.type !== currentType) return false;
+                if (currentGenre !== 'todos' && item.genre !== currentGenre) return false;
+
+                if (searchQuery) {
+                    const matchTitle = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+                    const matchDirector = item.director.toLowerCase().includes(searchQuery.toLowerCase());
+                    const matchGenre = item.genre.toLowerCase().includes(searchQuery.toLowerCase());
+                    if (!matchTitle && !matchDirector && !matchGenre) return false;
+                }
+
+                return true;
+            }).sort((a, b) => {
+                if (currentSort === 'rating-desc') return b.rating - a.rating;
+                if (currentSort === 'year-desc') return b.year - a.year;
+                if (currentSort === 'name-asc') return a.title.localeCompare(b.title);
+                return 0;
+            });
+        }
+
+        // RENDERIZAR CARDS
+        function renderMedia() {
+            const items = getFilteredMedia();
+
+            if (items.length === 0) {
+                mediaContainer.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem; background: var(--bg-card); border: 2px dashed var(--dark-main);">
+                        <p style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔍</p>
+                        <h3>No encontramos resultados</h3>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Prueba modificando la búsqueda, los filtros de género o desactivando la vista de favoritos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            mediaContainer.innerHTML = items.map(item => {
+                const isFav = favorites.includes(item.id);
+                const isMovie = item.type === 'pelicula';
+
+                return `
+                    <div class="media-card">
+                        <div class="media-poster-box">
+                            <span class="type-tag">${isMovie ? '🎬 Película' : '🎮 Videojuego'}</span>
+                            <span class="rating-badge">★ ${item.rating}</span>
+                            <img src="${item.poster}" alt="${item.title}" class="media-poster" loading="lazy">
+                        </div>
+                        <div class="media-card-body">
+                            <div class="media-year-genre">
+                                <span>${item.genre}</span>
+                                <span>${item.year}</span>
+                            </div>
+                            <h3 class="media-title">${item.title}</h3>
+                            <p class="media-synopsis">${item.synopsis}</p>
+                            <div class="media-card-footer">
+                                <button type="button" class="btn-view-details" onclick="openDetailsModal('${item.id}')">
+                                    Ver Tráiler ↗
+                                </button>
+                                <button type="button" class="btn-fav-toggle ${isFav ? 'is-fav' : ''}" onclick="toggleFavorite('${item.id}')" title="Marcar como favorito">
+                                    ${isFav ? '❤️' : '🤍'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ABRIR MODAL CON TRÁILER Y DETALLES
+        window.openDetailsModal = function(id) {
+            const item = MEDIA_DATABASE.find(m => m.id === id);
+            if (!item) return;
+
+            const isMovie = item.type === 'pelicula';
+            const isFav = favorites.includes(item.id);
+
+            modalContentBody.innerHTML = `
+                <div class="trailer-container">
+                    <iframe class="trailer-iframe" 
+                        src="https://www.youtube-nocookie.com/embed/${item.trailerId}?autoplay=1&rel=0" 
+                        title="${item.title} Trailer" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div class="modal-info-grid">
+                    <div>
+                        <h2 class="modal-title">${item.title}</h2>
+                        <div class="modal-meta-row">
+                            <span class="meta-tag">[ ${isMovie ? 'PELÍCULA' : 'VIDEOJUEGO'} ]</span>
+                            <span class="meta-tag">AÑO: ${item.year}</span>
+                            <span class="meta-tag">GÉNERO: ${item.genre}</span>
+                            <span class="meta-tag" style="color: #ffd700;">★ ${item.rating} / 10</span>
+                        </div>
+                        <p class="modal-synopsis">${item.synopsis}</p>
+                        <div class="modal-extra-details">
+                            <strong>${isMovie ? 'Director(es):' : 'Desarrolladora:'}</strong> ${item.director}<br>
+                            <strong>${isMovie ? 'Duración:' : 'Disponibilidad:'}</strong> ${item.duration}
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="type-tab ${isFav ? 'active' : ''}" onclick="toggleFavorite('${item.id}'); openDetailsModal('${item.id}');">
+                            ${isFav ? '❤️ En Favoritos' : '🤍 Guardar Favorito'}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            detailModal.style.display = 'flex';
+        };
+
+        // CERRAR MODAL
+        btnCloseModal.addEventListener('click', () => {
+            detailModal.style.display = 'none';
+            modalContentBody.innerHTML = ''; // Detiene el video de YouTube
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === detailModal) {
+                detailModal.style.display = 'none';
+                modalContentBody.innerHTML = '';
+            }
+        });
+
+        // EVENTOS DE FILTROS Y TABS
+        typeTabs.addEventListener('click', (e) => {
+            const btn = e.target.closest('.type-tab');
+            if (btn) {
+                document.querySelectorAll('.type-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentType = btn.dataset.type;
+                currentGenre = 'todos';
+                showFavoritesOnly = false;
+                btnToggleFavs.classList.remove('active');
+                updateGenreChips();
+                renderMedia();
+            }
+        });
+
+        genreChips.addEventListener('click', (e) => {
+            if (e.target.classList.contains('chip-btn')) {
+                document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentGenre = e.target.dataset.genre;
+                renderMedia();
+            }
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim();
+            renderMedia();
+        });
+
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderMedia();
+        });
+
+        btnToggleFavs.addEventListener('click', () => {
+            showFavoritesOnly = !showFavoritesOnly;
+            btnToggleFavs.classList.toggle('active', showFavoritesOnly);
+            renderMedia();
+            if (showFavoritesOnly) {
+                showToast('Mostrando tus películas y juegos favoritos');
+            }
+        });
+
+        // INICIALIZAR
+        favCounter.textContent = favorites.length;
+        updateGenreChips();
+        renderMedia();
+    </script>
+</body>
+</html>
